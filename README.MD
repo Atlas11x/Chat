@@ -1,2 +1,1 @@
-#Test
-Type "pip install flask" in console/terminal, for install libraris
+#Type "pip install flask" in console/terminal, for install libraris
