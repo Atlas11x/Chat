@@ -1,0 +1,13 @@
+body{
+    background: #696969;
+}
+
+#chatbox {
+    width: 600px;
+    height: 400px;
+    border: 1px solid black;
+    background: url(../img/kitten-cat-animals-4k-wallpaper-preview.jpg);
+    padding: 10px;
+    overflow-y: scroll;
+    size: 2000px;
+   }
