@@ -2,17 +2,34 @@
 <html>
 <head>
  <title>Authorization Form</title>
+ <link rel="stylesheet" href="../css/style-authoriz.css">
 </head>
 <body>
- <h1>Authorization Form</h1>
- <form action="process_auth.php" method="post">
-  <label for="username">Username:</label>
-  <input type="text" name="username" id="username" required>
-  <br><br>
-  <label for="password">Password:</label>
-  <input type="password" name="password" id="password" required>
-  <br><br>
-  <input type="submit" value="Login">
- </form>
+ <div class="neon-container">
+   <h1>Authorization Form</h1>
+   <form action="process_auth.php" method="post">
+    <label for="username">Username:</label>
+    <input type="text" name="username" id="username" required>
+    <br><br>
+    <label for="password">Password:</label>
+    <input type="password" name="password" id="password" required>
+    <br><br>
+    <input type="submit" value="Login">
+   </form>
+ </div>
+
+ <div class="settings-icon">
+   <div class="neon-square"></div>
+   <div class="dropdown-menu">
+     <ul>
+       <li><a href="#" onclick="changeColor('purple')">Purple</a></li>
+       <li><a href="#" onclick="changeColor('blue')">Blue</a></li>
+       <li><a href="#" onclick="changeColor('green')">Green</a></li>
+       <li><a href="#" onclick="changeColor('red')">Red</a></li>
+     </ul>
+   </div>
+ </div>
+
+ <script src="../js/script-authoriz.js"></script>
 </body>
 </html>
