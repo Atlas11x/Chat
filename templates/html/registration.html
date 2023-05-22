@@ -1,25 +1,36 @@
 <!DOCTYPE html>
-<html>
-<head>
- <title>Registration Form</title>
- <link rel="stylesheet" href="../css/style-registr.css">
-</head>
-<body>
- <h1>User Registration</h1>
- <form action="#" method="post">
-  <label for="username">Username:</label>
-  <input id="username" type="text" name="username" required><br><br>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>Login</title>
+    <link rel="stylesheet" href="../css/style-registr.css">
+  </head>
+  <body>
+    <div class="theme-switch">
+      <input type="checkbox" id="theme-toggle">
+      <label for="theme-toggle"></label>
+    </div>
+    <div class="center">
+      <h1>Login</h1>
+      <form method="post">
+        <div class="txt_field">
+          <input type="text" required>
+          <span></span>
+          <label>Username</label>
+        </div>
+        <div class="txt_field">
+          <input type="password" required>
+          <span></span>
+          <label>Password</label>
+        </div>
+        <div class="pass">Forgot Password?</div>
+        <input type="submit" value="Login">
+        <div class="signup_link">
+          Not a member? <a href="#">Signup</a>
+        </div>
+      </form>
+    </div>
 
-  <label for="email">Email:</label>
-  <input id="email" type="email" name="email" required><br><br>
-
-  <label for="password">Password:</label>
-  <input id="password" type="password" name="password" required><br><br>
-
-  <label for="confirm_password">Confirm Password:</label>
-  <input id="confirm_password" type="password" name="confirm_password" required><br><br>
-
-  <input type="submit" value="Register">
- </form>
-</body>
+    <script src="../js/script-registr.js"></script>
+  </body>
 </html>

@@ -1,165 +1,157 @@
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans:wght@700&family=Poppins:wght@400;500;600&display=swap');
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
 body {
-    margin: 0;
-    padding: 0;
-    font-family: Arial, sans-serif;
-    background: #141e30;
-    min-height: 100vh;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+  font-family: "Poppins", sans-serif;
 }
 
 .chat-container {
-    width: 400px;
-    padding: 40px;
-    background: rgba(0, 0, 0, .5);
-    box-sizing: border-box;
-    box-shadow: 0 15px 25px rgba(0, 0, 0, .6);
-    border-radius: 10px;
+  width: 400px;
+  margin: 50px auto;
+  background: white;
+  border-radius: 10px;
+  box-shadow: 10px 10px 15px rgba(0, 0, 0, 0.05);
+  padding: 20px;
 }
 
-.chatbox {
-    height: 200px;
-    overflow-y: scroll;
-    scrollbar-width: thin;
-    scrollbar-color: #03e9f4 #000;
-    margin-bottom: 20px;
-    padding: 10px;
-    background: #000;
+.chat-header {
+  text-align: center;
+  padding-bottom: 20px;
 }
 
-.chatbox p {
-    color: #fff;
-    margin: 5px 0;
+.chat-messages {
+  max-height: 300px;
+  overflow-y: scroll;
 }
 
-.chatbox::-webkit-scrollbar {
-    width: 8px;
+.message {
+  padding: 10px;
+  margin-bottom: 10px;
+  border-radius: 5px;
+  background: #2691d9;
+  color: #e9f4fb;
 }
 
-.chatbox::-webkit-scrollbar-track {
-    background: #000;
+.message.received {
+  background: #adadad;
+  color: #ffffff;
 }
 
-.chatbox::-webkit-scrollbar-thumb {
-    background-color: #03e9f4;
-    border-radius: 4px;
+.chat-input {
+  margin-top: 20px;
 }
 
-input[type="text"] {
-    width: 100%;
-    padding: 10px 0;
-    font-size: 16px;
-    color: #fff;
-    margin-bottom: 30px;
-    border: none;
-    border-bottom: 1px solid #fff;
-    outline: none;
-    background: transparent;
+.chat-input input[type="text"] {
+  width: 80%;
+  padding: 10px;
+  border: none;
+  border-bottom: 1px solid #adadad;
+  font-size: 16px;
 }
 
-input[type="text"]::placeholder {
-    color: #aaa;
+.chat-input button {
+  padding: 10px 20px;
+  background: #2691d9;
+  border: none;
+  border-radius: 5px;
+  color: #e9f4fb;
+  font-size: 16px;
+  cursor: pointer;
+  margin-left: 10px;
 }
 
-button {
-    position: relative;
-    display: inline-block;
-    padding: 10px 20px;
-    color: #03e9f4;
-    font-size: 16px;
-    text-decoration: none;
-    text-transform: uppercase;
-    overflow: hidden;
-    transition: .5s;
-    margin-top: 40px;
-    letter-spacing: 4px;
-    background: transparent;
-    border: 2px solid #03e9f4;
-    cursor: pointer;
+.chat-input button:hover {
+  background: #1d6ca7;
+}
+/* Add the following styles to the existing CSS */
+
+.theme-switch {
+  position: absolute;
+  top: 20px;
+  right: 20px;
 }
 
-button:hover {
-    background: #03e9f4;
-    color: #000;
+.theme-switch label {
+  display: inline-block;
+  width: 40px;
+  height: 20px;
+  background: #adadad;
+  border-radius: 10px;
+  position: relative;
+  cursor: pointer;
 }
 
-button span {
-    position: absolute;
-    display: block;
+.theme-switch label::after {
+  content: "";
+  position: absolute;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background: #fff;
+  top: 2px;
+  left: 2px;
+  transition: 0.2s;
 }
 
-button span:nth-child(1) {
-    top: 0;
-    left: -100%;
-    width: 100%;
-    height: 2px;
-    background: linear-gradient(90deg, transparent, #03e9f4);
-    animation: btn-anim1 1s linear infinite;
+.theme-switch input[type="checkbox"] {
+  display: none;
 }
 
-@keyframes btn-anim1 {
-    0% {
-        left: -100%;
-    }
-    50%, 100% {
-        left: 100%;
-    }
+.theme-switch input[type="checkbox"]:checked + label {
+  background: #555555;
 }
 
-button span:nth-child(2) {
-    top: -100%;
-    right: 0;
-    width: 2px;
-    height: 100%;
-    background: linear-gradient(180deg, transparent, #03e9f4);
-    animation: btn-anim2 1s linear infinite;
-    animation-delay: .25s;
+.theme-switch input[type="checkbox"]:checked + label::after {
+  left: 22px;
 }
 
-@keyframes btn-anim2 {
-    0% {
-        top: -100%;
-    }
-    50%, 100% {
-        top: 100%;
-    }
+body.light-theme {
+  background-color: #f8f8f8;
+  color: #333333;
 }
 
-button span:nth-child(3) {
-    bottom: 0;
-    right: -100%;
-    width: 100%;
-    height: 2px;
-    background: linear-gradient(270deg, transparent, #03e9f4);
-    animation: btn-anim3 1s linear infinite;
-    animation-delay: .5s;
+body.light-theme .chat-container {
+  background-color: #ffffff;
 }
 
-@keyframes btn-anim3 {
-    0% {
-        right: -100%;
-    }
-    50%, 100% {
-        right: 100%;
-    }
+body.light-theme .message.received {
+  background-color: #ebebeb;
+  color: #333333;
 }
 
-button span:nth-child(4) {
-    bottom: -100%;
-    left: 0;
-    width: 2px;
-    height: 100%;
-    background: linear-gradient(360deg, transparent, #03e9f4);
-    animation: btn-anim4 1s linear infinite;
-    animation-delay: .75s;
+body.light-theme .chat-input input[type="text"] {
+  border-bottom-color: #333333;
 }
 
-@keyframes btn-anim4 {
-    0% {
-        bottom: -100%;
-    }
-    50%, 100% {
-        bottom: 100%;
-    }
+body.light-theme .chat-input button {
+  background-color: #333333;
+  color: #ffffff;
 }
+
+body.dark-theme {
+  background-color: #222222;
+  color: #ffffff;
+}
+
+body.dark-theme .chat-container {
+  background-color: #333333;
+}
+
+body.dark-theme .message.received {
+  background-color: #555555;
+}
+
+body.dark-theme .chat-input input[type="text"] {
+  border-bottom-color: #ffffff;
+}
+
+body.dark-theme .chat-input button {
+  background-color: #ffffff;
+  color: #333333;
+}
+
