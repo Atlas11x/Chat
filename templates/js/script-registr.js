@@ -1,12 +1,6 @@
-document.addEventListener("DOMContentLoaded", function() {
-  const body = document.querySelector("body");
-  const themeToggle = document.getElementById("theme-toggle");
+const themeSwitchCheckbox = document.getElementById('theme-switch-checkbox');
+const body = document.body;
 
-  themeToggle.addEventListener("change", function() {
-    if (this.checked) {
-      body.classList.add("dark-theme");
-    } else {
-      body.classList.remove("dark-theme");
-    }
-  });
+themeSwitchCheckbox.addEventListener('change', function () {
+  body.classList.toggle('dark-theme');
 });

@@ -1,36 +1,45 @@
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
-  <head>
-    <meta charset="utf-8">
-    <title>Login</title>
-    <link rel="stylesheet" href="../css/style-registr.css">
-  </head>
-  <body>
-    <div class="theme-switch">
-      <input type="checkbox" id="theme-toggle">
-      <label for="theme-toggle"></label>
-    </div>
-    <div class="center">
-      <h1>Login</h1>
-      <form method="post">
-        <div class="txt_field">
-          <input type="text" required>
-          <span></span>
-          <label>Username</label>
-        </div>
-        <div class="txt_field">
-          <input type="password" required>
-          <span></span>
-          <label>Password</label>
-        </div>
-        <div class="pass">Forgot Password?</div>
-        <input type="submit" value="Login">
-        <div class="signup_link">
-          Not a member? <a href="#">Signup</a>
-        </div>
-      </form>
-    </div>
 
-    <script src="../js/script-registr.js"></script>
-  </body>
+<head>
+  <meta charset="utf-8">
+  <title>Login</title>
+  <link rel="stylesheet" href="../css/style-registr.css">
+  <link rel="stylesheet" href="../css/theme-switcher.css">
+</head>
+
+<body>
+  <div class="center">
+    <h1>Login</h1>
+    <div class="theme-switch">
+      <input type="checkbox" id="theme-switch-checkbox">
+      <label for="theme-switch-checkbox" class="theme-switch-label">
+        <span class="toggle-icons">
+          <i class="fas fa-moon"></i>
+          <i class="fas fa-sun"></i>
+        </span>
+      </label>
+    </div>
+    <form method="post">
+      <div class="txt_field">
+        <input type="text" required>
+        <span></span>
+        <label>Username</label>
+      </div>
+      <div class="txt_field">
+        <input type="password" required>
+        <span></span>
+        <label>Password</label>
+      </div>
+      <div class="pass">Forgot Password?</div>
+      <input type="submit" value="Login">
+      <div class="signup_link">
+        Not a member? <a href="#">Signup</a>
+      </div>
+    </form>
+  </div>
+
+  <script src="../js/script-registr.js"></script>
+</body>
+
 </html>
