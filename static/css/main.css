@@ -73,7 +73,6 @@ html, body {
     position: relative;
     width: 300px;
     margin: 0 auto;
-    background: #fff;
 }
 
 .header__input, .header__button {
@@ -119,3 +118,15 @@ html, body {
     margin-left: 20px;
 }
 /* - /Login - */
+
+
+/* === Main === */
+
+.main {
+    margin-top: 40px;
+}
+
+.main__title {
+    font-size: 28px;
+    text-align: center;
+}

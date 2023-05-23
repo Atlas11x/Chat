@@ -6,7 +6,7 @@
 
 {% block main %}
 <div class="sign">
-    <h3 class="sign__title">Sign in</h3>
+    <h2 class="sign__title">Sign in</h2>
     <form class="sign__form" method="post">
         <div class="txt_field">
             <input type="text" required>
@@ -19,7 +19,10 @@
             <label>Password</label>
         </div>
         <div class="pass">Forgot Password?</div>
-        <input type="submit" value="Signin">
+        <input type="submit" value="Sign in">
+        <div class="signup_link">
+            Not a member? <a href="#">Sign up</a>
+        </div>
     </form>
 </div>
 {% endblock %}

@@ -7,6 +7,10 @@ body {
   background-color: #f1f1f1;
 }
 
+.txt__flex {
+  display: flex;
+}
+
 .sign {
   position: absolute;
   top: 50%;
@@ -27,7 +31,7 @@ body {
 }
 
 .sign__form {
-  padding: 0 40px 30px;
+  padding: 0 40px;
   box-sizing: border-box;
 }
 
@@ -35,6 +39,13 @@ body {
   position: relative;
   border-bottom: 2px solid #adadad;
   margin: 30px 0;
+}
+
+.txt_field-up {
+  margin-left: 30px;
+}
+.txt_field-up:first-child {
+  margin-left: 0;
 }
 
 .txt_field input {

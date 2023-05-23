@@ -1,0 +1,43 @@
+{% extends 'layout.html' %}
+
+{% block title %}
+- Sign up
+{% endblock %}
+
+{% block main %}
+<div class="sign">
+    <h2 class="sign__title">Sign up</h2>
+    <form class="sign__form" method="post">
+        <div class="txt__flex">
+            <div class="txt_field txt_field-up">
+                <input type="text" required>
+                <span></span>
+                <label>Email</label>
+            </div>
+            <div class="txt_field txt_field-up">
+                <input type="text" required>
+                <span></span>
+                <label>Username</label>
+            </div>
+        </div>
+
+
+        <div class="txt__flex">
+            <div class="txt_field txt_field-up">
+                <input type="password" required>
+                <span></span>
+                <label>Password</label>
+            </div>
+            <div class="txt_field txt_field-up">
+                <input type="password" required>
+                <span></span>
+                <label>Repeat password</label>
+            </div>
+        </div>
+        <input type="submit" value="Sign up">
+        <div class="signup_link">
+            You are a member? <a href="#">Sign in</a>
+        </div>
+    </form>
+</div>
+{% endblock %}

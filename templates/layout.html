@@ -9,6 +9,8 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='css/reset.css') }}">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/style-registr.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/chat.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/theme-switcher.css') }}">
 </head>
 
 <body>
@@ -24,13 +26,16 @@
                     <!-- Menu -->
                     <ul class="header__menu">
                         <li class="nav__list">
-                            <a class="nav__link" href="/About">About</a>
+                            <a class="nav__link" href="/about">About</a>
                         </li>
                         <li class="nav__list">
                             <a class="nav__link" href="/news">News</a>
                         </li>
                         <li class="nav__list">
                             <a class="nav__link" href="/contacts">Contacts</a>
+                        </li>
+                        <li class="nav__list">
+                            <a class="nav__link" href="/chat">Chat</a>
                         </li>
                     </ul>
 
@@ -49,6 +54,15 @@
                         <a class="login__link" href="/signin">Sign in</a>
                         <a class="login__link" href="/signup">Sign up</a>
                     </div>
+                    <div class="theme-switch">
+                        <input type="checkbox" id="theme-switch-checkbox">
+                        <label for="theme-switch-checkbox" class="theme-switch-label">
+                            <span class="toggle-icons">
+                                <i class="fas fa-moon"></i>
+                                <i class="fas fa-sun"></i>
+                            </span>
+                        </label>
+                    </div>
                 </nav>
                 <div class="nav__bottom-border"></div>
             </header>
@@ -65,5 +79,8 @@
         </div>
     </div>
 </body>
+
+<script src="{{ url_for('static', filename='js/script.js') }}"></script>
+<script src="{{ url_for('static', filename='js/script-registr.js') }}"></script>
 
 </html>

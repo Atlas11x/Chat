@@ -47,6 +47,11 @@ def about():
     return render_template("about.html")
 
 
+@app.route('/chat')
+def chat():
+    return render_template("chat.html")
+
+
 @app.route('/signin')
 def signin():
     return render_template("signin.html")
@@ -63,11 +68,6 @@ def login():
     
     name = ...
     return render_template('html/index.html')
-
-
-@app.route('/chat')
-def chat():
-    return render_template('html/Chat.html')
 
 
 @soketio.on('message')
