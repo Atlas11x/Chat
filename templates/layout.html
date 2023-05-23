@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Project Name {% block title %}{% endblock %}</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/reset.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style-registr.css') }}">
+</head>
+
+<body>
+    <div class="wrapper">
+        <div class="container">
+
+            <!-- Header -->
+            <header class="header">
+                <nav class="header__nav">
+                    <!-- Logo -->
+                    <a class="header__logo logo" href="/">Project Name</a>
+
+                    <!-- Menu -->
+                    <ul class="header__menu">
+                        <li class="nav__list">
+                            <a class="nav__link" href="/About">About</a>
+                        </li>
+                        <li class="nav__list">
+                            <a class="nav__link" href="/news">News</a>
+                        </li>
+                        <li class="nav__list">
+                            <a class="nav__link" href="/contacts">Contacts</a>
+                        </li>
+                    </ul>
+
+                    <!-- Search -->
+                    <div class="header__search">
+                        <form class="header__form">
+                            <input class="header__input" type="text" placeholder="Поиск...">
+                            <button class="header__button" type="submit">
+                                <img class="search-img" src="{{ url_for('static', filename='img/icons/search.png') }}">
+                            </button>
+                        </form>
+                    </div>
+
+                    <!-- Login -->
+                    <div class="header__login">
+                        <a class="login__link" href="/signin">Sign in</a>
+                        <a class="login__link" href="/signup">Sign up</a>
+                    </div>
+                </nav>
+                <div class="nav__bottom-border"></div>
+            </header>
+
+            <!-- Main -->
+            <main class="main">
+                {% block main %}{% endblock %}
+            </main>
+
+            <!-- Footer -->
+            <footer class="footer">
+            </footer>
+
+        </div>
+    </div>
+</body>
+
+</html>

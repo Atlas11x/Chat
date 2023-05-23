@@ -38,12 +38,28 @@ def load_user(user_id):
     return user
 
 @app.route('/')
-def start():
-    return render_template('html/index.html')
+def index():
+    return render_template("index.html")
+
+
+@app.route('/about')
+def about():
+    return render_template("about.html")
+
+
+@app.route('/signin')
+def signin():
+    return render_template("signin.html")
+
+
+@app.route('/signup')
+def signup():
+    return render_template("signup.html")
+
 
 
 # @app.route('/login', methods=['POST'])
-def start():
+def login():
     
     name = ...
     return render_template('html/index.html')
@@ -52,6 +68,7 @@ def start():
 @app.route('/chat')
 def chat():
     return render_template('html/Chat.html')
+
 
 @soketio.on('message')
 def message_handler(data):

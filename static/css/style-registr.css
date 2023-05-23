@@ -7,7 +7,7 @@ body {
   background-color: #f1f1f1;
 }
 
-.center {
+.sign {
   position: absolute;
   top: 50%;
   left: 50%;
@@ -18,18 +18,20 @@ body {
   box-shadow: 10px 10px 15px rgba(0,0,0,0.05);
 }
 
-.center h1 {
+.sign__title {
+  font-weight: 600;
+  font-size: 18px;
   text-align: center;
   padding: 20px 0;
   border-bottom: 1px solid silver;
 }
 
-.center form {
-  padding: 0 40px;
+.sign__form {
+  padding: 0 40px 30px;
   box-sizing: border-box;
 }
 
-form .txt_field {
+.txt_field {
   position: relative;
   border-bottom: 2px solid #adadad;
   margin: 30px 0;
