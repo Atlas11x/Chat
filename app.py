@@ -3,6 +3,8 @@ from flask_socketio import SocketIO
 from flask_login import LoginManager
 from flask_sqlalchemy import SQLAlchemy
 from hashlib import md5
+from datetime import datetime as dt
+import os
 
 
 # Запуск приложения
@@ -70,24 +72,6 @@ def signin():
 @app.route('/signup')
 def signup():
     return render_template("signup.html")
-
-
-
-# @app.route('/login', methods=['POST'])
-def login():
-    
-    name = ...
-    return render_template('html/index.html')
-
-
-@soketio.on('message')
-def message_handler(data):
-    db.add_message(data.user, data.text)
-    print(data)
-    soketio.emit('message', data, broadcast=True)
-    
-    
     
 if __name__ == '__main__':
-    db.main()
-    soketio.run(app)
+    app.run()
