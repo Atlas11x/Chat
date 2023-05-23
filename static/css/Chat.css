@@ -1,0 +1,158 @@
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans:wght@700&family=Poppins:wght@400;500;600&display=swap');
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: "Poppins", sans-serif;
+}
+
+.chat-container {
+  width: 400px;
+  margin: 50px auto;
+  background: white;
+  border-radius: 10px;
+  box-shadow: 10px 10px 15px rgba(0, 0, 0, 0.05);
+  padding: 20px;
+}
+
+.chat-header {
+  text-align: center;
+  padding-bottom: 20px;
+}
+
+.chat-messages {
+  max-height: 300px;
+  overflow-y: scroll;
+}
+
+.message {
+  padding: 10px;
+  margin-bottom: 10px;
+  border-radius: 5px;
+  background: #2691d9;
+  color: #e9f4fb;
+}
+
+.message.received {
+  background: #adadad;
+  color: #ffffff;
+}
+
+.chat-input {
+  margin-top: 20px;
+}
+
+.chat-input input[type="text"] {
+  width: 80%;
+  padding: 10px;
+  border: none;
+  border-bottom: 1px solid #adadad;
+  font-size: 16px;
+}
+
+.chat-input button {
+  margin-left: 10px;
+  padding: 10px 15px;
+  border: none;
+  border-radius: 4px;
+  background-color: #2691d9;
+  color: #ffffff;
+  font-size: 14px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.chat-input button:hover {
+  background: #1d6ca7;
+}
+/* Add the following styles to the existing CSS */
+
+.theme-switch {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+}
+
+.theme-switch label {
+  display: inline-block;
+  width: 40px;
+  height: 20px;
+  background: #adadad;
+  border-radius: 10px;
+  position: relative;
+  cursor: pointer;
+}
+
+.theme-switch label::after {
+  content: "";
+  position: absolute;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background: #fff;
+  top: 2px;
+  left: 2px;
+  transition: 0.2s;
+}
+
+.theme-switch input[type="checkbox"] {
+  display: none;
+}
+
+.theme-switch input[type="checkbox"]:checked + label {
+  background: #555555;
+}
+
+.theme-switch input[type="checkbox"]:checked + label::after {
+  left: 22px;
+}
+
+body.light-theme {
+  background-color: #f8f8f8;
+  color: #333333;
+}
+
+body.light-theme .chat-container {
+  background-color: #ffffff;
+}
+
+body.light-theme .message.received {
+  background-color: #ebebeb;
+  color: #333333;
+}
+
+body.light-theme .chat-input input[type="text"] {
+  border-bottom-color: #333333;
+}
+
+body.light-theme .chat-input button {
+  background-color: #333333;
+  color: #ffffff;
+}
+
+body.dark-theme {
+  background-color: #222222;
+  color: #ffffff;
+}
+
+body.dark-theme .chat-container {
+  background-color: #333333;
+}
+
+body.dark-theme .message.received {
+  background-color: #555555;
+}
+
+body.dark-theme .chat-input input[type="text"] {
+  border-bottom-color: #ffffff;
+}
+
+body.dark-theme .chat-input button {
+  background-color: #ffffff;
+  color: #333333;
+}
+

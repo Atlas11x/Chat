@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<!-- Coding By CodingNepal - youtube.com/codingnepal -->
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>Animated Sign up Form | CodingNepal</title>
+    <link rel="stylesheet" href=" {{ url_for('static', filename='css/style-authoriz.css') }} ">
+  </head>
+  <body>
+    <div class="center">
+      <h1>Sign up</h1>
+      <form method="POST">
+        <div class="txt_field">
+          <input name="name" type="text" required>
+          <span></span>
+          <label>Username</label>
+        </div>
+        <div class="txt_field">
+          <input name="password" type="password" required>
+          <span></span>
+          <label>Password</label>
+        </div>
+        <!--<div class="pass">Forgot Password?</div>-->
+        <div class="signup_link">
+          Member? <a href="/login">Login</a>
+        </div>
+        <input type="submit" value="Sing up">
+      </form>
+    </div>
+
+  </body>
+</html>

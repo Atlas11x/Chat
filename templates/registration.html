@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+
+<head>
+  <meta charset="utf-8">
+  <title>Login</title>
+  <link rel="stylesheet" href=" {{ url_for('static', filename='css/style-registr.css') }}">
+  <link rel="stylesheet" href=" {{ url_for('static', filename='css/theme-switcher.css') }} ">
+</head>
+
+<body>
+  <div class="center">
+    <h1>Login</h1>
+    <div class="theme-switch">
+      <input type="checkbox" id="theme-switch-checkbox">
+      <label for="theme-switch-checkbox" class="theme-switch-label">
+        <span class="toggle-icons">
+          <i class="fas fa-moon"></i>
+          <i class="fas fa-sun"></i>
+        </span>
+      </label>
+    </div>
+    <form method="POST">
+      <div class="txt_field">
+        <input name="name" type="text" required>
+        <span></span>
+        <label>Username</label>
+      </div>
+      <div class="txt_field">
+        <input name="password" type="password" required>
+        <span></span>
+        <label>Password</label>
+      </div>
+      <div class="pass">Forgot Password?</div>
+      <input type="submit" value="Login">
+      <div class="signup_link">
+        Not a member? <a href="/singup">Signup</a>
+      </div>
+    </form>
+  </div>
+
+  <script src=" {{ url_for('static', filename='js/script-registr.js') }} "></script>
+</body>
+
+</html>

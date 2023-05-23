@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>Chat App</title>
+    <link rel="stylesheet" href=" {{ url_for('static', filename='css/Chat.css') }} ">
+  </head>
+  <body>
+    <div class="theme-switch">
+      <input type="checkbox" id="theme-toggle">
+      <label for="theme-toggle"></label>
+    </div>
+    <div class="parallax">
+      <div class="chat-container">
+        <div class="chat-header">
+          <h1>Chat App</h1>
+        </div>
+        <div class="chat-messages">
+          {% for message in messages  %}
+          <div class="message">{{ message.text }}</div>
+          {% endfor %}
+        </div>
+        <form method='POST'>
+          <div class="chat-input">
+            <input name='message' id='message' type="text" placeholder="Type your message...">
+            <button>Send</button>
+          </div>
+        </form>
+      </div>
+    </div>
+    <script src=" {{ url_for('static', filename='js/script.js') }} "></script>
+  </body>
+</html>
