@@ -2,6 +2,9 @@ from flask import Flask, url_for, request, render_template
 from flask_socketio import SocketIO
 from flask_login import LoginManager
 from flask_sqlalchemy import SQLAlchemy
+from flask_wtf import FlaskForm
+from wtforms import StringField, PasswordField, SubmitField
+from wtforms.validators import EqualTo, Length, DataRequired
 from hashlib import md5
 from datetime import datetime as dt
 import os
@@ -12,13 +15,24 @@ app = Flask(__name__)
 soketio = SocketIO(app)
 login_manager = LoginManager(app)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///site.db'
+app.config['SECRET_KEY'] = 'asklj34lkj453298d7nrjhdo786webtoet786twuigh3ob5736dermax'
 db = SQLAlchemy(app)
+
+
+# Форма Singup
+class FormSingup(FlaskForm):
+    name = StringField('Имя: ', validators=[Length(min=5, max=30, message='Пароль должен быть от 5 до 30 символов'), DataRequired('Это обязательное поле')])
+    password = PasswordField('Пароль: ', validators=[Length(min=8, max=100), DataRequired('Это обязательное поле')])
+    frogt_password = PasswordField('Повторите: ', validators=[Length(min=8, max=100), EqualTo('password', message='Пароли не совпадают'), DataRequired('Это обязательное поле')])
+    submit = SubmitField('Sing up')
+    
 
 
 # Все пользователи
 class Users(db.Model):
     name = db.Column(db.String, primary_key=True)
     password = db.Column(db.String, nullable=False)
+    avatar = db.Column(db.LargeBinary, nullable=False, default=b'')
     
     def __repr__(self):
         return '<Users %r>' % self.name
@@ -68,9 +82,19 @@ def signin():
     return render_template("signin.html")
 
 
-@app.route('/signup')
+@app.route('/signup', methods=['GET', 'POST'])
 def signup():
-    return render_template("signup.html")
+    form = FormSingup()
+    
+    if form.validate_on_submit():
+        if not Users.query.get(form.name.data):
+            user = Users(name=form.name.data, password=form.password.data)
+            db.session.add(user)
+            db.session.commit()
+        else:
+            return 'Такой пользователь уже есть'
+    
+    return render_template("signup.html", form=form)
 
 
 @app.errorhandler(404)

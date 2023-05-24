@@ -8,20 +8,17 @@
 <div class="sign">
     <h2 class="sign__title">Sign up</h2>
     <form class="sign__form" method="post">
-        
-        <div class="txt_field">
-            <input type="text" required>
-            <span></span>
-            <label>Username</label>
-        </div>
+        {{ form.hidden_tag() }}
+        {% for pole in form if pole.name not in ['submit', 'csrf_token'] %}
 
         <div class="txt_field">
-            <input type="password" required>
+            {{ pole() }}
             <span></span>
-            <label>Password</label>
+            <label>{{ pole.label() }}</label>
         </div>
-        
-        <input type="submit" value="Sign up">
+
+        {% endfor %}
+        {{ form.submit() }}
         <div class="signup_link">
             You are a member? <a href="/signin">Sign in</a>
         </div>
