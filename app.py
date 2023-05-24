@@ -72,6 +72,11 @@ def signin():
 @app.route('/signup')
 def signup():
     return render_template("signup.html")
+
+
+@app.errorhandler(404)
+def error_404(_):
+    return render_template('404-page.html')
     
 if __name__ == '__main__':
     app.run()
