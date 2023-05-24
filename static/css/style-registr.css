@@ -92,8 +92,14 @@ body {
 }
 
 .pass {
-  margin: -5px 0 20px 5px;
+  margin: -10px 0 20px 190px;
   color: #a6a6a6;
+  cursor: pointer;
+}
+
+.bool {
+  margin: -5px 0 20px 5px;
+  color: #222222;
   cursor: pointer;
 }
 

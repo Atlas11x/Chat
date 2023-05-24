@@ -3,7 +3,7 @@ from flask_socketio import SocketIO
 from flask_login import LoginManager, login_required, login_user
 from flask_sqlalchemy import SQLAlchemy
 from flask_wtf import FlaskForm
-from wtforms import StringField, PasswordField, SubmitField
+from wtforms import StringField, PasswordField, SubmitField, BooleanField
 from wtforms.validators import EqualTo, Length, DataRequired
 from hashlib import md5
 from datetime import datetime as dt
@@ -46,6 +46,15 @@ class FormSingup(FlaskForm):
     password = PasswordField('Пароль: ', validators=[Length(min=8, max=100), DataRequired('Это обязательное поле')])
     frogt_password = PasswordField('Повторите: ', validators=[Length(min=8, max=100), EqualTo('password', message='Пароли не совпадают'), DataRequired('Это обязательное поле')])
     submit = SubmitField('Sing up')
+    
+    
+    
+# Форма Singin
+class FormSingin(FlaskForm):
+    name = StringField('Имя: ', validators=[Length(min=5, max=30), DataRequired('Это обязательное поле')])
+    password = PasswordField('Пароль: ', validators=[Length(min=8, max=100), DataRequired('Это обязательное поле')])
+    remember = BooleanField('Запомнить? ', default=False)
+    submit = SubmitField('Login')
     
 
 
@@ -97,9 +106,18 @@ def chat():
     return render_template("chat.html")
 
 
-@app.route('/signin')
-def signin():
-    return render_template("signin.html")
+@app.route('/login', methods=['GET', 'POST'])
+def login():
+    form = FormSingin()
+    if form.validate_on_submit():
+        user = Users().query.get(form.name.data)
+        
+        if user and user.password == md5(form.password.data.encode()).hexdigest():
+            login_user(User().create(form.name.data), remember=form.remember.data)
+            return redirect('/')
+        
+        return 'Некоректные данные'
+    return render_template("login.html", form=form)
 
 
 @app.route('/signup', methods=['GET', 'POST'])
@@ -108,7 +126,7 @@ def signup():
     
     if form.validate_on_submit():
         if not Users.query.get(form.name.data):
-            user = Users(name=form.name.data, password=form.password.data)
+            user = Users(name=form.name.data, password=md5(form.password.data.encode()).hexdigest())
             db.session.add(user)
             db.session.commit()
             login_user(User().create(form.name.data))

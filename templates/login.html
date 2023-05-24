@@ -7,19 +7,18 @@
 {% block main %}
 <div class="sign">
     <h2 class="sign__title">Sign in</h2>
-    <form class="sign__form" method="post">
+    <form class="sign__form" method="POST">
+        {{ form.hidden_tag() }}
+        {% for pole in form if pole.name not in ['remember', 'submit', 'csrf_token']%}
         <div class="txt_field">
-            <input type="text" required>
+            {{ pole() }}
             <span></span>
-            <label>Username</label>
+            <label>{{ pole.label() }}</label>
         </div>
-        <div class="txt_field">
-            <input type="password" required>
-            <span></span>
-            <label>Password</label>
-        </div>
+        {% endfor %}
+        <div class="bool">{{ form.remember.label() }}<a>{{ form.remember() }}</div>
         <div class="pass">Forgot Password?</div>
-        <input type="submit" value="Sign in">
+        {{ form.submit() }}
         <div class="signup_link">
             Not a member? <a href="/signup">Sign up</a>
         </div>
