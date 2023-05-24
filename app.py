@@ -2,13 +2,11 @@ from flask import Flask, url_for, request, render_template, session, redirect
 from flask_socketio import SocketIO
 from flask_login import LoginManager, login_required, login_user
 from flask_sqlalchemy import SQLAlchemy
-from flask_wtf import FlaskForm
-from wtforms import StringField, PasswordField, SubmitField, BooleanField
-from wtforms.validators import EqualTo, Length, DataRequired
 from hashlib import md5
 from datetime import datetime as dt
 import os
 
+from classes import init_
 
 # Запуск приложения
 app = Flask(__name__)
@@ -19,74 +17,8 @@ app.config['SECRET_KEY'] = 'asklj34lkj453298d7nrjhdo786webtoet786twuigh3ob5736de
 db = SQLAlchemy(app)
 
 
-# Сессия пользователя
-class User:
-    def create(self, name):
-        self.user_ = dict()
-        self.user_['name'] = name
-        self.user_['password'] = Users().query.get(name).password
-        return self
-    
-    
-    def is_authenticated(self):
-        return True
-    
-    
-    def is_active(self):
-        return True
-    
-    
-    def is_anonymous(self):
-        return False
-    
-    
-    def get_id(self):
-        return self.user_['name']
-
-
-# Форма Singup
-class FormSingup(FlaskForm):
-    name = StringField('Имя: ', validators=[Length(min=5, max=30, message='Пароль должен быть от 5 до 30 символов'), DataRequired('Это обязательное поле')])
-    password = PasswordField('Пароль: ', validators=[Length(min=8, max=100), DataRequired('Это обязательное поле')])
-    frogt_password = PasswordField('Повторите: ', validators=[Length(min=8, max=100), EqualTo('password', message='Пароли не совпадают'), DataRequired('Это обязательное поле')])
-    submit = SubmitField('Sing up')
-    
-    
-    
-# Форма Singin
-class FormSingin(FlaskForm):
-    name = StringField('Имя: ', validators=[Length(min=5, max=30), DataRequired('Это обязательное поле')])
-    password = PasswordField('Пароль: ', validators=[Length(min=8, max=100), DataRequired('Это обязательное поле')])
-    remember = BooleanField('Запомнить? ', default=False)
-    submit = SubmitField('Login')
-    
-
-
-# Все пользователи
-class Users(db.Model):
-    name = db.Column(db.String, primary_key=True)
-    password = db.Column(db.String, nullable=False)
-    avatar = db.Column(db.LargeBinary, nullable=False, default=b'')
-    
-    def __repr__(self):
-        return '<Users %r>' % self.name
-
-
-# Сообщения
-class Message(db.Model):
-    id = db.Column(db.Integer, primary_key=True)
-    from_user = db.Column(db.String, nullable=False)
-    text = db.Column(db.String, nullable=False)
-    datetime = db.Column(db.DateTime, default=dt.utcnow())
-
-    def __repr__(self):
-        return '<Message %r>' % self.name
-
-
-# Создание бд если нету
-if not os.path.exists(f'instance/{app.config["SQLALCHEMY_DATABASE_URI"]}'):
-    with app.app_context():
-        db.create_all()
+# Инициализация
+Users, Message, User, FormSingup, FormLogin = init_(app, db)
 
 
 # Загрузка пользователя
@@ -99,7 +31,6 @@ def load_user(name):
 @app.route('/')
 def index():
     return render_template("index.html")
-
 
 
 # Про нас
@@ -118,7 +49,7 @@ def chat():
 # Вход
 @app.route('/login', methods=['GET', 'POST'])
 def login():
-    form = FormSingin()
+    form = FormLogin()
     
     if form.validate_on_submit():
         user = Users().query.get(form.name.data)
@@ -154,6 +85,6 @@ def signup():
 def error_404(_):
     return render_template('404-page.html')
 
- 
+
 if __name__ == '__main__':
     app.run()
