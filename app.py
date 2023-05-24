@@ -19,6 +19,27 @@ app.config['SECRET_KEY'] = 'asklj34lkj453298d7nrjhdo786webtoet786twuigh3ob5736de
 db = SQLAlchemy(app)
 
 
+# Сессия пользователя
+class User:
+    def create(self, name):
+        self.user_ = dict()
+        self.user_['name'] = name
+        self.user_['password'] = Users().query.get(name).password
+        return self
+    
+    def is_authenticated(self):
+        return True
+    
+    def is_active(self):
+        return True
+    
+    def is_anonymous(self):
+        return False
+    
+    def get_id(self):
+        return 
+
+
 # Форма Singup
 class FormSingup(FlaskForm):
     name = StringField('Имя: ', validators=[Length(min=5, max=30, message='Пароль должен быть от 5 до 30 символов'), DataRequired('Это обязательное поле')])
@@ -54,13 +75,10 @@ if not os.path.exists(f'instance/{app.config["SQLALCHEMY_DATABASE_URI"]}'):
     with app.app_context():
         db.create_all()
 
-# Дальше вообще недоделано
 
 @login_manager.user_loader
-def load_user(user_id):
-    user = request.form['name']
-    user = request.form['password']
-    return user
+def load_user(name):
+    return User().create(name)
 
 @app.route('/')
 def index():
