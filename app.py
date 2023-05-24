@@ -1,4 +1,4 @@
-from flask import Flask, request, render_template
+from flask import Flask, url_for, request, render_template
 from flask_socketio import SocketIO
 from flask_login import LoginManager
 from flask_sqlalchemy import SQLAlchemy
@@ -71,6 +71,11 @@ def signin():
 @app.route('/signup')
 def signup():
     return render_template("signup.html")
+
+
+@app.errorhandler(404)
+def error_404(_):
+    return render_template('404-page.html')
     
 if __name__ == '__main__':
     app.run()
