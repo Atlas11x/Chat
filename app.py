@@ -19,7 +19,6 @@ db = SQLAlchemy(app)
 class Users(db.Model):
     name = db.Column(db.String, primary_key=True)
     password = db.Column(db.String, nullable=False)
-    avatar = db.Column(db.LargeBinary, nullable=False)
     
     def __repr__(self):
         return '<Users %r>' % self.name
