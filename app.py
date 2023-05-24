@@ -1,6 +1,6 @@
-from flask import Flask, url_for, request, render_template
+from flask import Flask, url_for, request, render_template, session, redirect
 from flask_socketio import SocketIO
-from flask_login import LoginManager
+from flask_login import LoginManager, login_required, login_user
 from flask_sqlalchemy import SQLAlchemy
 from flask_wtf import FlaskForm
 from wtforms import StringField, PasswordField, SubmitField
@@ -37,7 +37,7 @@ class User:
         return False
     
     def get_id(self):
-        return 
+        return self.user_['name']
 
 
 # Форма Singup
@@ -80,6 +80,7 @@ if not os.path.exists(f'instance/{app.config["SQLALCHEMY_DATABASE_URI"]}'):
 def load_user(name):
     return User().create(name)
 
+
 @app.route('/')
 def index():
     return render_template("index.html")
@@ -90,7 +91,8 @@ def about():
     return render_template("about.html")
 
 
-@app.route('/chat')
+@app.route('/chat', methods=['GET', 'POST'])
+@login_required
 def chat():
     return render_template("chat.html")
 
@@ -101,7 +103,7 @@ def signin():
 
 
 @app.route('/signup', methods=['GET', 'POST'])
-def signup():
+def signup():                               
     form = FormSingup()
     
     if form.validate_on_submit():
@@ -109,6 +111,8 @@ def signup():
             user = Users(name=form.name.data, password=form.password.data)
             db.session.add(user)
             db.session.commit()
+            login_user(User().create(form.name.data))
+            return redirect('/')
         else:
             return 'Такой пользователь уже есть'
     
