@@ -27,14 +27,18 @@ class User:
         self.user_['password'] = Users().query.get(name).password
         return self
     
+    
     def is_authenticated(self):
         return True
+    
     
     def is_active(self):
         return True
     
+    
     def is_anonymous(self):
         return False
+    
     
     def get_id(self):
         return self.user_['name']
@@ -85,30 +89,37 @@ if not os.path.exists(f'instance/{app.config["SQLALCHEMY_DATABASE_URI"]}'):
         db.create_all()
 
 
+# Загрузка пользователя
 @login_manager.user_loader
 def load_user(name):
     return User().create(name)
 
 
+# Главная страница
 @app.route('/')
 def index():
     return render_template("index.html")
 
 
+
+# Про нас
 @app.route('/about')
 def about():
     return render_template("about.html")
 
 
+# Чат
 @app.route('/chat', methods=['GET', 'POST'])
 @login_required
 def chat():
     return render_template("chat.html")
 
 
+# Вход
 @app.route('/login', methods=['GET', 'POST'])
 def login():
     form = FormSingin()
+    
     if form.validate_on_submit():
         user = Users().query.get(form.name.data)
         
@@ -120,6 +131,7 @@ def login():
     return render_template("login.html", form=form)
 
 
+# Регистрация
 @app.route('/signup', methods=['GET', 'POST'])
 def signup():                               
     form = FormSingup()
@@ -131,15 +143,17 @@ def signup():
             db.session.commit()
             login_user(User().create(form.name.data))
             return redirect('/')
-        else:
-            return 'Такой пользователь уже есть'
+        
+        return 'Такой пользователь уже есть'
     
     return render_template("signup.html", form=form)
 
 
+# Обработка 404
 @app.errorhandler(404)
 def error_404(_):
     return render_template('404-page.html')
-    
+
+ 
 if __name__ == '__main__':
     app.run()
