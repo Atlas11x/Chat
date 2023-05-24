@@ -51,8 +51,9 @@
 
                     <!-- Login -->
                     <div class="header__login">
-                        <a class="login__link" href="/login">Log in</a>
-                        <a class="login__link" href="/signup">Sign up</a>
+                        {% for link_, text_ in links_.items() %}
+                        <a class="login__link" href="{{ link_ }}">{{ text_ }}</a>
+                        {% endfor %}
                     </div>
                     <div class="theme-switch">
                         <input type="checkbox" id="theme-switch-checkbox">

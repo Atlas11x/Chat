@@ -1,9 +1,10 @@
 from flask import Flask, url_for, request, render_template, session, redirect
 from flask_socketio import SocketIO
-from flask_login import LoginManager, login_required, login_user
+from flask_login import LoginManager, login_required, login_user, logout_user
 from flask_sqlalchemy import SQLAlchemy
 from hashlib import md5
 from datetime import datetime as dt
+from functools import partial
 import os
 
 from classes import init_
@@ -18,7 +19,16 @@ db = SQLAlchemy(app)
 
 
 # Инициализация
-Users, Message, User, FormSingup, FormLogin = init_(app, db)
+Users, Message, User, FormSignup, FormLogin = init_(app, db)
+links1 = {'/signup': 'Sign up', '/login': 'Log in'}
+links2 = {'/logout': 'Log out'}
+
+
+####################################################################################
+old_rt = render_template                                                           # Гениально, да?
+def render_template(*args, **kwargs):                                              # Но partial НЕ работает
+    return old_rt(*args, **kwargs, links_=[links1, links2]['_user_id' in session]) # Так что такой декоратор
+####################################################################################
 
 
 # Загрузка пользователя
@@ -30,6 +40,7 @@ def load_user(name):
 # Главная страница
 @app.route('/')
 def index():
+    
     return render_template("index.html")
 
 
@@ -65,7 +76,7 @@ def login():
 # Регистрация
 @app.route('/signup', methods=['GET', 'POST'])
 def signup():                               
-    form = FormSingup()
+    form = FormSignup()
     
     if form.validate_on_submit():
         if not Users.query.get(form.name.data):
@@ -78,6 +89,14 @@ def signup():
         return 'Такой пользователь уже есть'
     
     return render_template("signup.html", form=form)
+
+
+# Выход с профиля
+@app.route('/logout')
+@login_required
+def logout():
+    logout_user()
+    return redirect('/')
 
 
 # Обработка 404

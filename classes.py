@@ -55,7 +55,7 @@ def init_(app: Flask, db: SQLAlchemy):
 
 
     # Форма Singup
-    class FormSingup_(FlaskForm):
+    class FormSignup_(FlaskForm):
         name = StringField('Имя: ', validators=[Length(min=5, max=30, message='Пароль должен быть от 5 до 30 символов'), DataRequired('Это обязательное поле')])
         password = PasswordField('Пароль: ', validators=[Length(min=8, max=100), DataRequired('Это обязательное поле')])
         frogt_password = PasswordField('Повторите: ', validators=[Length(min=8, max=100), EqualTo('password', message='Пароли не совпадают'), DataRequired('Это обязательное поле')])
@@ -77,4 +77,4 @@ def init_(app: Flask, db: SQLAlchemy):
     
     
     # global Users, Message, User, FormSingup, FormLogin
-    return Users_, Message_, User_, FormSingup_, FormLogin_
+    return Users_, Message_, User_, FormSignup_, FormLogin_

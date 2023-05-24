@@ -17,7 +17,7 @@
         </div>
         {% endfor %}
         <div class="bool">{{ form.remember.label() }}<a>{{ form.remember() }}</div>
-        <div class="pass">Forgot Password?</div>
+        <div class="pass"><a href='/resetpass'>Forgot Password?</a></div>
         {{ form.submit() }}
         <div class="signup_link">
             Not a member? <a href="/signup">Sign up</a>
