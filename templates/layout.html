@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{% block title %}{% endblock %}</title>
+    <title>ProgramIT - {% block title %}{% endblock %}</title>
     <script src="//cdnjs.cloudflare.com/ajax/libs/socket.io/4.3.1/socket.io.min.js"></script>
     <script>
         var socket = io();
@@ -41,22 +41,15 @@
             <header class="header">
                 <nav class="header__nav">
                     <!-- Logo -->
-                    <a class="header__logo logo" href="/">Project Name</a>
+                    <a class="header__logo logo" href="/">ProgramIT</a>
 
                     <!-- Menu -->
                     <ul class="header__menu">
+                        {% for link_m, text_m in links_m.items() %}
                         <li class="nav__list">
-                            <a class="nav__link" href="/about">About</a>
+                            <a class="nav__link" href="{{ link_m }}">{{ text_m }}</a>
                         </li>
-                        <li class="nav__list">
-                            <a class="nav__link" href="/news">News</a>
-                        </li>
-                        <li class="nav__list">
-                            <a class="nav__link" href="/contacts">Contacts</a>
-                        </li>
-                        <li class="nav__list">
-                            <a class="nav__link" href="/chat">Chat</a>
-                        </li>
+                        {% endfor %}
                     </ul>
 
                     <!-- Search -->
@@ -71,8 +64,8 @@
 
                     <!-- Login -->
                     <div class="header__login">
-                        {% for link_, text_ in links_.items() %}
-                        <a class="login__link" href="{{ link_ }}">{{ text_ }}</a>
+                        {% for link_s, text_s in links_stat.items() %}
+                        <a class="login__link" href="{{ link_s }}">{{ text_s }}</a>
                         {% endfor %}
                     </div>
                     <div class="theme-switch">

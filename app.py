@@ -21,14 +21,31 @@ db = SQLAlchemy(app)
 
 # Инициализация
 Users, Message, User, FormSignup, FormLogin, FormChat = init_(app, db)
-links1 = {'/signup': 'Sign up', '/login': 'Log in'}
-links2 = {'/logout': 'Log out'}
+links_stat1 = {'/signup': 'Sign up', '/login': 'Log in'}
+links_stat2 = {'/logout': 'Log out'}
 
+links_m1 = {'/about': 'About', '/news': 'News', '/contacts': 'Contacts'}
+links_m2 = {'/about': 'About', '/news': 'News', '/contacts': 'Contacts', '/chat': 'Chat'}
+
+
+
+""" <li class="nav__list">
+    <a class="nav__link" href="</a>
+    </li>
+    <li class="nav__list">
+        <a class="nav__link" href="</a>
+    </li>
+    <li class="nav__list">
+        <a class="nav__link" href="</a>
+    </li>
+    <li class="nav__list">
+        <a class="nav__link" href="</a>
+    </li> """
 
 ####################################################################################
 old_rt = render_template                                                           # Гениально, да?
 def render_template(*args, **kwargs):                                              # Но partial НЕ работает
-    return old_rt(*args, **kwargs, links_=[links1, links2]['_user_id' in session]) # Так что такой декоратор
+    return old_rt(*args, **kwargs, links_stat=[links_stat1, links_stat2]['_user_id' in session], links_m=[links_m1, links_m2]['_user_id' in session]) # Так что такой декоратор
 ####################################################################################
 
 
@@ -69,6 +86,9 @@ def message_handler(message_):
 # Вход
 @app.route('/login', methods=['GET', 'POST'])
 def login():
+    if '_user_id' in session:
+        return redirect('/home')
+    
     form = FormLogin()
     
     if form.validate_on_submit():
@@ -84,7 +104,10 @@ def login():
 
 # Регистрация
 @app.route('/signup', methods=['GET', 'POST'])
-def signup():                               
+def signup():
+    if '_user_id' in session:
+        return redirect('/home')
+    
     form = FormSignup()
     
     if form.validate_on_submit():
