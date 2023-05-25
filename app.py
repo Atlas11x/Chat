@@ -1,5 +1,5 @@
 from flask import Flask, url_for, request, render_template, session, redirect
-from flask_socketio import SocketIO
+from flask_socketio import SocketIO, emit
 from flask_login import LoginManager, login_required, login_user, logout_user
 from flask_sqlalchemy import SQLAlchemy
 from hashlib import md5
@@ -15,6 +15,7 @@ soketio = SocketIO(app)
 login_manager = LoginManager(app)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///site.db'
 app.config['SECRET_KEY'] = 'asklj34lkj453298d7nrjhdo786webtoet786twuigh3ob5736dermax'
+socetio = SocketIO(app)
 db = SQLAlchemy(app)
 
 
@@ -64,6 +65,11 @@ def chat():
     
     messages = Message().query.all()
     return render_template("chat.html", messages=messages, form=form)
+
+@socetio.on('message')
+def message_handler(message):
+    print(message)
+    emit(message)
 
 
 # Вход
