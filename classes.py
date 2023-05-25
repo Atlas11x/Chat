@@ -71,7 +71,7 @@ def init_(app: Flask, db: SQLAlchemy):
         
         
     class FormChat_(FlaskForm):
-        text = StringField(render_kw={'placeholder': 'Type your message...'})
+        text = StringField(validators=[DataRequired('А как это прочитают?')], render_kw={'placeholder': 'Type your message...'})
         send = SubmitField('Send')
     
     
