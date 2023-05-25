@@ -34,7 +34,10 @@ def init_(app: Flask, db: SQLAlchemy):
         def create(self, name):
             self.user_ = dict()
             self.user_['name'] = name
-            self.user_['password'] = Users_().query.get(name).password
+            try:
+                self.user_['password'] = Users_().query.get(name).password
+            except:
+                self.user_['password'] = ''
             return self
         
         

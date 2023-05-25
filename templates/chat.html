@@ -23,9 +23,8 @@
         <form method='POST'>
           <div class="chat-input">
             <!--<input name='message' id='message' type="text" placeholder="Type your message...">-->
-            {{ form.hidden_tag() }}
-            {{ form.text() }}
-            <button onclick='sendMessage()'>Send</button>
+            <input id='message-form' type='text' placeholder='Type your message...'>
+            <button onclick='SendMessage()'>Send</button>
           </div>
         </form>
       </div>

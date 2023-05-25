@@ -55,21 +55,15 @@ def about():
 @app.route('/chat', methods=['GET', 'POST'])
 @login_required
 def chat():
-    form = FormChat()
-    
-    if form.validate_on_submit():
-        message = Message(from_user=session['_user_id'], text=form.text.data)
-        db.session.add(message)
-        db.session.commit()
-        return redirect('/chat')
-    
     messages = Message().query.all()
-    return render_template("chat.html", messages=messages, form=form)
+    return render_template("chat.html", messages=messages)
 
 @socetio.on('message')
-def message_handler(message):
-    print(message)
-    emit(message)
+def message_handler(message_):
+    message = Message(text=message_, from_user= session['_user_id'])
+    db.session.add(message)
+    db.session.commit()
+    emit('response', message_, broadcast=True)
 
 
 # Вход
@@ -121,4 +115,4 @@ def error_404(_):
 
 
 if __name__ == '__main__':
-    app.run()
+    socetio.run(app)
