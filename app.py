@@ -28,20 +28,6 @@ links_m1 = {'/about': 'About', '/news': 'News', '/contacts': 'Contacts'}
 links_m2 = {'/about': 'About', '/news': 'News', '/contacts': 'Contacts', '/chat': 'Chat'}
 
 
-
-""" <li class="nav__list">
-    <a class="nav__link" href="</a>
-    </li>
-    <li class="nav__list">
-        <a class="nav__link" href="</a>
-    </li>
-    <li class="nav__list">
-        <a class="nav__link" href="</a>
-    </li>
-    <li class="nav__list">
-        <a class="nav__link" href="</a>
-    </li> """
-
 ####################################################################################
 old_rt = render_template                                                           # Гениально, да?
 def render_template(*args, **kwargs):                                              # Но partial НЕ работает
