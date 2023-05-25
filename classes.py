@@ -1,7 +1,7 @@
 from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
 from flask_wtf import FlaskForm
-from wtforms import StringField, PasswordField, SubmitField, BooleanField
+from wtforms import StringField, PasswordField, SubmitField, BooleanField, TextAreaField
 from wtforms.validators import EqualTo, Length, DataRequired
 from datetime import datetime as dt
 import os
@@ -68,6 +68,11 @@ def init_(app: Flask, db: SQLAlchemy):
         password = PasswordField('Пароль: ', validators=[Length(min=8, max=100), DataRequired('Это обязательное поле')])
         remember = BooleanField('Запомнить? ', default=False)
         submit = SubmitField('Login')
+        
+        
+    class FormChat_(FlaskForm):
+        text = StringField(render_kw={'placeholder': 'Type your message...'})
+        send = SubmitField('Send')
     
     
     # Создание бд если нету
@@ -77,4 +82,4 @@ def init_(app: Flask, db: SQLAlchemy):
     
     
     # global Users, Message, User, FormSingup, FormLogin
-    return Users_, Message_, User_, FormSignup_, FormLogin_
+    return Users_, Message_, User_, FormSignup_, FormLogin_, FormChat_

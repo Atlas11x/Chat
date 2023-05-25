@@ -19,7 +19,7 @@ db = SQLAlchemy(app)
 
 
 # Инициализация
-Users, Message, User, FormSignup, FormLogin = init_(app, db)
+Users, Message, User, FormSignup, FormLogin, FormChat = init_(app, db)
 links1 = {'/signup': 'Sign up', '/login': 'Log in'}
 links2 = {'/logout': 'Log out'}
 
@@ -54,7 +54,16 @@ def about():
 @app.route('/chat', methods=['GET', 'POST'])
 @login_required
 def chat():
-    return render_template("chat.html")
+    form = FormChat()
+    
+    if form.validate_on_submit():
+        message = Message(from_user=session['_user_id'], text=form.text.data)
+        db.session.add(message)
+        db.session.commit()
+        return redirect('/chat')
+    
+    messages = Message().query.all()
+    return render_template("chat.html", messages=messages, form=form)
 
 
 # Вход
